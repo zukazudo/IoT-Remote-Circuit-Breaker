@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div(class='container')
+    h1(style='text-align:center' class = (error === undefined ? 'text-success' : 'text-danger'))= title
+
+    br
+
+    if error
+      p error

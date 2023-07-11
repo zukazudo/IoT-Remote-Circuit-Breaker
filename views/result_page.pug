@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1(style='text-align:center')= title
+
+  div(class='container')
+    if error
+      h3(class='text-danger')= message
+    else
+      h3(class='text-success')= message

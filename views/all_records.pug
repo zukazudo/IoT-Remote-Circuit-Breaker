@@ -1,0 +1,26 @@
+extends layout
+
+block content
+
+  h1(style='text-align:center')= title
+
+  div(class='container')
+    div
+      button.btn.btn-danger(type='button') #[a(href='/delete-data' style='color: white; text-decoration: none') Clear Values ]
+     
+    br
+    br
+    table(class='table table-striped')
+      thead
+        tr
+          th #[strong Entry No]
+          th #[strong Current (mA)]
+          th #[strong Time]
+          th #[strong Status]
+      tbody
+        each item in current_values
+          tr
+            td #{current_values.indexOf(item) + 1}
+            td #{item.value}
+            td #{item.date}
+            td(class= item.state == 'short' ? 'short-circuit' : 'normal')

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1(style='text-align:center')= title
+  div(class='col-sm-2')
+  div(class='container col-sm-9')
+    table(class='table table-striped w-auto' style='table-layout: auto;')
+      thead
+        tr
+          th Full Name
+          th Action
+      tody
+        each item in results
+          tr
+            td= item.username
+            td #[a(href=`/delete-user/${item._id}`) #[button.btn.btn-danger(type='button') Delete]]
+    
+    button.btn.btn-danger(type='button') #[a(style='color:white' href='/delete-users') Delete All Users]
+ 

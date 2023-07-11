@@ -1,0 +1,69 @@
+doctype html
+html(lang='en')
+  head
+    title= title
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    style(type='text/css').
+      .short-circuit {
+        background-color: #e60000;
+        color: white;
+      }
+      .normal {
+        background-color: #248f24;
+        color: white;
+      }
+      .button-on {
+        background-color: green;
+        color: green;
+        border-radius: 20px;
+        padding: 5px;
+        border: none;
+      }
+      .button-off {
+        background-color: red;
+        color: red;
+        border-radius: 20px;
+        padding: 5px;
+        border: none;
+      }
+      
+    script.
+      document.addEventListener('DOMContentLoaded', function(event) {
+        const elem = document.getElementById("machineState")
+        elem.addEventListener("click", toggleButton)
+        function toggleButton() {
+          fetch('/toggle-state')
+            .then(result => result.text())
+            .then(text => {
+              if(text == 'on') {
+                elem.className = 'button-on';
+              }
+              else if(text == 'off') {
+                elem.className = 'button-off';
+              }
+              else {
+                alert('error');
+              }
+            })
+        };
+      });
+      
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js")
+    
+  body
+    nav(class='navbar navbar-inverse')
+      div(class='container-fluid')
+        div(class='navbar-header')
+          a(class='navbar-brand' href='#') Remote Circuit Breaker
+        ul(class='nav navbar-nav')
+          li #[a(href='/') Home]
+          li #[a(href='/records') Records]
+          li #[a(href='/signup') Add User]
+          li #[a(href='/users') Users]
+        div(class='nav navbar-nav navbar-right' style='margin-right:10px')
+          h5(style= 'text-align: center; color:#d6d6c2') Machine state #[button(type='button' class= machine_state == 'on' ? 'button-on' : 'button-off' id='machineState') aa]
+    block content
+    
